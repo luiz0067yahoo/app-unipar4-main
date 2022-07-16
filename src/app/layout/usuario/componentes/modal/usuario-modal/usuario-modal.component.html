@@ -1,0 +1,62 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{usuario?.id ? 'Editando': 'Inserindo'}} usuário</h5>
+</div>
+<div class="modal-body m-3">
+
+  <form [formGroup]="formGroup" *ngIf="formGroup">
+
+    <div class="row">
+      <!-- Campo de UserName -->
+      <mat-form-field class="col-md-6 col-lg-4 mt-1">
+        <mat-label>Login do usuário</mat-label>
+        <input type="text" matInput formControlName="username">
+        <app-message-valid-control [control]="username!"> </app-message-valid-control>
+      </mat-form-field>
+
+      <!-- Campo de Senha -->
+      <mat-form-field class="col-md-6 col-lg-4 mt-1">
+        <mat-label>Senha</mat-label>
+        <input type="password" matInput formControlName="password">
+        <app-message-valid-control [control]="password!"></app-message-valid-control>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <!-- Campo de Nome -->
+      <mat-form-field class=" col-md-12 mt-1">
+        <mat-label>Nome</mat-label>
+        <input type="text" matInput formControlName="name">
+        <app-message-valid-control [control]="name!"> </app-message-valid-control>
+      </mat-form-field>
+
+      <!-- Campo de E-mail -->
+      <mat-form-field class="col-md-12 mt-1">
+        <mat-label>E-mail</mat-label>
+        <input type="email" matInput formControlName="email">
+        <app-message-valid-control [control]="email!"> </app-message-valid-control>
+      </mat-form-field>
+
+      <!-- Mostra as informações de datas -->
+      <div class="col-md-6 mt-3 text-info" *ngIf="usuario?.dateInsert">
+        Data da Inclusão: {{usuario?.dateInsert | date : 'dd/MM/yyyy HH:mm:ss'}}
+      </div>
+      <div class="col-md-6 mt-3 text-info" *ngIf="usuario?.dateUpdate">
+        Data da Atualização: {{usuario?.dateUpdate | date : 'dd/MM/yyyy HH:mm:ss'}}
+      </div>
+    </div>
+
+  </form>
+
+</div>
+<div class="modal-footer">
+  <!-- Botão para salvar o usuário -->
+  <button class="btn btn-success" (click)="salvar()">
+    <i class="fa fa-save mr-2"></i>
+    Salvar
+  </button>
+  <!-- Botão para excluír o usuário (só mostra se já tiver ID, senão não precisa excluir poir nem inseriu) -->
+  <button class="btn btn-danger" (click)="excluir()" *ngIf="usuario?.id">
+    <i class="fa fa-delete mr-2"></i>
+    Excluír
+  </button>
+</div>
